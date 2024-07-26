@@ -7,13 +7,7 @@ import {
   integer,
 } from "drizzle-orm/pg-core";
 
-
 import type { AdapterAccountType } from "next-auth/adapters";
-
-
-
-
-
 
 export const users = pgTable("user", {
   id: text("id")
@@ -23,6 +17,17 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+});
+
+export const todos = pgTable("todos", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  title: text("title").notNull(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  complete: boolean("complete").notNull().default(false),
 });
 
 export const accounts = pgTable(

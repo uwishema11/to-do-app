@@ -1,11 +1,13 @@
-"use client";
+"use clint";
 
 import { TodosOperations } from "@/components/todosList";
 
-export default function Home() {
+const TodosPage = () => {
   return (
     <>
       <TodosOperations />
     </>
   );
-}
+};
+
+export default TodosPage;
