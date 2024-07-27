@@ -3,15 +3,16 @@ import { todos } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const PUT = async (req: NextRequest) => {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get('id');
-
-  if (!id) {
-    return NextResponse.json({ error: 'ID is required' }, { status: 400 });
-  }
-
+export async function PATCH(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url);
+    // Log the incoming request
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+    }
+
     const [currentTask] = await db
       .select()
       .from(todos)
@@ -21,21 +22,23 @@ export const PUT = async (req: NextRequest) => {
     if (!currentTask) {
       return NextResponse.json({ error: 'Task not found' }, { status: 404 });
     }
-    console.log(currentTask);
+
     const complete = !currentTask.complete;
 
-    const result = await db
+    const updatedTask = await db
       .update(todos)
-      .set({ complete: complete })
+      .set({ complete })
       .where(eq(todos.id, id))
       .returning();
 
-    return NextResponse.json(result);
+    return NextResponse.json({
+      message: 'Task updated successfully',
+      task: updatedTask,
+    });
   } catch (error) {
-    console.error('Error updating task:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 },
     );
   }
-};
+}

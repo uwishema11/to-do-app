@@ -13,6 +13,9 @@ export const DELETE = async (req: NextRequest) => {
     await db.delete(todos).where(eq(todos.id, id)).returning();
     return NextResponse.json({ message: `Task deleted successfully` });
   } catch (error) {
-    console.log(error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 },
+    );
   }
 };

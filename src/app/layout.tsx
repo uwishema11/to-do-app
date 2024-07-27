@@ -3,7 +3,7 @@ import { SessionProvider } from 'next-auth/react';
 import './globals.css';
 import QueryProvider from '@/providers/QueryClientProvider';
 import { Inter } from 'next/font/google';
-import NavBar from '@/components/navBar';
+import NavBar from '@/components/NavBar';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,14 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <SessionProvider>
-          <QueryProvider>
+      <SessionProvider>
+        <QueryProvider>
+          <body className={inter.className}>
             <NavBar />
             {children}
-          </QueryProvider>
-        </SessionProvider>
-      </body>
+          </body>
+        </QueryProvider>
+      </SessionProvider>
     </html>
   );
 }

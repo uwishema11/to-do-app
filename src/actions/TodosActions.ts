@@ -6,19 +6,22 @@ export async function fetchData() {
   return response.json();
 }
 
-export async function updateData(id: string) {
-  const response = await fetch(`/api/todos/edit/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+export async function updateCompleteStatus(id: string) {
+  try {
+    const response = await fetch(`/api/todos/update?id=${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-  if (!response.ok) {
-    throw new Error('Failed to update data');
+    if (!response.ok) {
+      throw new Error('Failed to update task');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
   }
-
-  return response.json();
 }
 
 export async function InsertData(task: string) {

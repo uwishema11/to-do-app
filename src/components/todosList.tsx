@@ -1,53 +1,28 @@
 'use client';
-import { fetchData } from '@/services/useTodos';
-import { deleteData, updateData } from '@/services/useTodos';
-import { TaskForm } from './addTodo';
-import ToDoList from './Todos';
+import { fetchData } from '@/actions/TodosActions';
+import { TaskForm } from './AddTodo';
+import { ButtonDemo } from './Button';
+import Item from './Todo';
 import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import { elementType } from '@/types/todoType';
 
-export const TodosOperations = () => {
+ export function TodosOperations () {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['todos'],
     queryFn: fetchData,
   });
 
-  const queryClient = useQueryClient();
-  const deleteMutation = useMutation({
-    mutationFn: deleteData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
-    },
-  });
-
-  const updateMutation = useMutation({
-    mutationFn: updateData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
-    },
-  });
-
   if (isLoading) {
     return <span>Loading...</span>;
   }
   if (isError) {
-    console.error('Error fetching todos:', error);
     return <span>Error: {error.message}</span>;
   }
 
-  const handleDeleteTask = (id: string) => {
-    console.log('Deleting task with ID:', id);
-    deleteMutation.mutate(id);
-  };
-
   const handleAddTaskButton = () => {
     setShowAddTaskForm((showForm) => !showForm);
-  };
-
-  const handleComplete = (id: string, complete: boolean) => {
-    console.log('Completing task with ID:', id);
-    updateMutation.mutate(id);
   };
 
   return (
@@ -55,13 +30,16 @@ export const TodosOperations = () => {
       <p className="mb-4 py-7 text-center text-3xl font-bold underline">
         To do list app
       </p>
-      <ToDoList
-        onAddTaskButton={handleAddTaskButton}
-        onDelete={handleDeleteTask}
-        todoList={data}
-        onComplete={handleComplete}
-      />
+      <div className="lists">
+        <ul>
+          {data?.map(({ element }: elementType) => (
+            <Item key={element.id} task={element} />
+          ))}
+        </ul>
+        <ButtonDemo onClick={handleAddTaskButton}>Add Task</ButtonDemo>
+      </div>
       {showAddTaskForm && <TaskForm />}
     </div>
   );
 };
+

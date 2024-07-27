@@ -11,8 +11,14 @@ export default async function NavBar() {
           <div className="text-white text-2xl font-bold">
             <Link href="/">TodoApp</Link>
           </div>
-          {/* <Link href="/todos">TODOS</Link> */}
-          <SignOut />
+          <ul className="flex space-x-4">
+            <li>
+              <Link href="/api/auth/signout">Log Out</Link>
+            </li>
+            <li>
+              <Link href="/todos">Your Todos</Link>
+            </li>
+          </ul>
         </div>
       </nav>
     );
@@ -27,6 +33,9 @@ export default async function NavBar() {
         <ul className="flex space-x-4">
           <li>
             <Link href="/api/auth/signin">Login</Link>
+          </li>
+          <li>
+            <Link href="/todos">Your Todos</Link>
           </li>
         </ul>
       </div>

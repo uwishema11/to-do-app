@@ -11,3 +11,14 @@ export interface todoType {
 export interface taskType {
   title: string;
 }
+export interface ToDoListProps {
+  onAddTaskButton: () => void;
+  todoList: todoType[];
+}
+
+export interface elementType {
+  element: todoType;
+}
+export interface ItemProps {
+  task: todoType;
+}

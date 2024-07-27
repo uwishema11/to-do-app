@@ -4,19 +4,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   try {
-    // Log the incoming request
-    console.log('Incoming GET request:', req.url);
+    const result = await db.select().from(todos);
 
-    const query = await db.select().from(todos);
-
-    // const result = await query;
-
-    if (query.length === 0) {
-      console.warn('No data found in todos table');
-    }
-    return NextResponse.json(query);
+    return NextResponse.json(result);
   } catch (error) {
-    console.error('Error fetching todos:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 },

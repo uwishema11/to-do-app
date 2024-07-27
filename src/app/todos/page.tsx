@@ -1,11 +1,9 @@
-'use clint';
-
-import { TodosOperations } from '@/components/todosList';
+import { TodosOperations } from "@/components/todosList";
 
 const TodosPage = () => {
   return (
     <>
-      <TodosOperations />
+      <TodosOperations  />
     </>
   );
 };
