@@ -1,6 +1,6 @@
-"use client";
-import { ReactNode, MouseEvent } from "react";
-import { Button } from "./ui/button";
+'use client';
+import { ReactNode, MouseEvent } from 'react';
+import { Button } from './ui/button';
 
 interface ButtonProps {
   children: ReactNode;

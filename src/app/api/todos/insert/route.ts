@@ -25,18 +25,18 @@
 //         console.log(error)
 //     }
 // }
-import { db } from "@/db";
-import { NextRequest, NextResponse } from "next/server";
-import { todos } from "@/db/schema";
-import { auth } from "@/auth";
+import { db } from '@/db';
+import { NextRequest, NextResponse } from 'next/server';
+import { todos } from '@/db/schema';
+import { auth } from '@/auth';
 
 export const POST = async (req: NextRequest) => {
   try {
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json(
-        { message: "Not Authenticated" },
-        { status: 401 }
+        { message: 'Not Authenticated' },
+        { status: 401 },
       );
     }
 
@@ -44,11 +44,11 @@ export const POST = async (req: NextRequest) => {
     const userId = session?.user.id as string;
 
     // Validate title
-    if (!title || typeof title !== "string") {
-      return NextResponse.json({ message: "Invalid data" }, { status: 400 });
+    if (!title || typeof title !== 'string') {
+      return NextResponse.json({ message: 'Invalid data' }, { status: 400 });
     }
 
-    console.log("values", { title, userId });
+    console.log('values', { title, userId });
 
     const newTask = await db
       .insert(todos)
@@ -58,13 +58,13 @@ export const POST = async (req: NextRequest) => {
       })
       .returning();
 
-    console.log("newTask", newTask);
+    console.log('newTask', newTask);
     return NextResponse.json({ newTask });
   } catch (error) {
-    console.error("Error in POST /api/insert:", error);
+    console.error('Error in POST /api/insert:', error);
     return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
+      { message: 'Internal Server Error' },
+      { status: 500 },
     );
   }
 };

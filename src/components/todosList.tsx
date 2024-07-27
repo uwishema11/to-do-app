@@ -1,14 +1,15 @@
-import { fetchData } from "@/services/useTodos";
-import { deleteData, updateData } from "@/services/useTodos";
-import { TaskForm } from "./addTodo";
-import ToDoList from "./Todos";
-import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+'use client';
+import { fetchData } from '@/services/useTodos';
+import { deleteData, updateData } from '@/services/useTodos';
+import { TaskForm } from './addTodo';
+import ToDoList from './Todos';
+import { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const TodosOperations = () => {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
   const { isLoading, isError, data, error } = useQuery({
-    queryKey: ["todos"],
+    queryKey: ['todos'],
     queryFn: fetchData,
   });
 
@@ -16,7 +17,14 @@ export const TodosOperations = () => {
   const deleteMutation = useMutation({
     mutationFn: deleteData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: updateData,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
     },
   });
 
@@ -24,12 +32,12 @@ export const TodosOperations = () => {
     return <span>Loading...</span>;
   }
   if (isError) {
-    console.error("Error fetching todos:", error);
+    console.error('Error fetching todos:', error);
     return <span>Error: {error.message}</span>;
   }
 
   const handleDeleteTask = (id: string) => {
-    console.log("Deleting task with ID:", id);
+    console.log('Deleting task with ID:', id);
     deleteMutation.mutate(id);
   };
 
@@ -38,8 +46,8 @@ export const TodosOperations = () => {
   };
 
   const handleComplete = (id: string, complete: boolean) => {
-    console.log("Completing task with ID:", id);
-    // updateMutation.mutate(id, complete);
+    console.log('Completing task with ID:', id);
+    updateMutation.mutate(id);
   };
 
   return (

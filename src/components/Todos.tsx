@@ -1,9 +1,8 @@
-
-import { todoType } from "@/types/todoType";
-import { taskType } from "@/types/todoType";
-import { ButtonDemo } from "./Button";
-import { FC } from "react";
-import Item from "./todo";
+import { todoType } from '@/types/todoType';
+import { taskType } from '@/types/todoType';
+import { ButtonDemo } from './Button';
+import { FC } from 'react';
+import Item from './todo';
 
 interface ToDoListProps {
   onAddTaskButton: () => void;

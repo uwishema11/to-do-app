@@ -66,12 +66,12 @@
 //   );
 // }
 
-import { Button } from "./ui/button";
-import { InsertData } from "@/services/useTodos";
-import { Input } from "./ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { Button } from './ui/button';
+import { InsertData } from '@/services/useTodos';
+import { Input } from './ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import {
   Form,
   FormControl,
@@ -79,13 +79,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
+} from './ui/form';
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const taskSchema = z.object({
   title: z.string().min(2, {
-    message: "Task name must be at least 2 characters long",
+    message: 'Task name must be at least 2 characters long',
   }),
 });
 
@@ -93,7 +93,7 @@ export function TaskForm() {
   const form = useForm<z.infer<typeof taskSchema>>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
-      title: "",
+      title: '',
     },
   });
 
@@ -102,16 +102,16 @@ export function TaskForm() {
   const addMutation = useMutation({
     mutationFn: InsertData,
     onSuccess: () => {
-      console.log("Mutation successful, invalidating queries...");
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      console.log('Mutation successful, invalidating queries...');
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
     },
     onError: (error) => {
-      console.error("Mutation error:", error);
+      console.error('Mutation error:', error);
     },
   });
 
   const onSubmit = async (data: z.infer<typeof taskSchema>) => {
-    console.log("Submitting data:", data.title);
+    console.log('Submitting data:', data.title);
     addMutation.mutate(data.title);
     form.reset();
   };
@@ -132,7 +132,16 @@ export function TaskForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        {addMutation.isPending && <p>Loading...</p>}
+        {addMutation.isError && (
+          <p className="text-red-500">
+            {addMutation.error?.message ||
+              'An error occurred while adding the task'}
+          </p>
+        )}
+        <Button type="submit" disabled={addMutation.isPending}>
+          {addMutation.isPending ? 'Submitting...' : 'Submit'}
+        </Button>
       </form>
     </Form>
   );

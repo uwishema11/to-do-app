@@ -1,7 +1,6 @@
-import { auth } from "@/auth";
-import Link from "next/link";
-import { SignOut } from "./SignOut";
-
+import { auth } from '@/auth';
+import Link from 'next/link';
+import { SignOut } from './SignOut';
 
 export default async function NavBar() {
   const session = await auth();
@@ -12,8 +11,8 @@ export default async function NavBar() {
           <div className="text-white text-2xl font-bold">
             <Link href="/">TodoApp</Link>
           </div>
-          <SignOut/>
-          <Link href="/todos">TODOS</Link>
+          {/* <Link href="/todos">TODOS</Link> */}
+          <SignOut />
         </div>
       </nav>
     );
@@ -27,7 +26,7 @@ export default async function NavBar() {
         </div>
         <ul className="flex space-x-4">
           <li>
-            <Link href="/Login">Login</Link>
+            <Link href="/api/auth/signin">Login</Link>
           </li>
         </ul>
       </div>

@@ -1,8 +1,8 @@
-"use client";
-import { ButtonDemo } from "./Button";
-import { Checkbox } from "./ui/checkbox";
-import { FC } from "react";
-import { todoType } from "@/types/todoType";
+'use client';
+import { ButtonDemo } from './Button';
+import { Checkbox } from './ui/checkbox';
+import { FC } from 'react';
+import { todoType } from '@/types/todoType';
 
 interface ItemProps {
   task: todoType;
@@ -13,7 +13,7 @@ interface ItemProps {
 const Item: FC<ItemProps> = ({ task, onDelete, onComplete }) => {
   return (
     <li className="flex items-center justify-between p-2">
-      <h3 className={task.complete ? "line-through" : ""}>{task.title}</h3>
+      <h3 className={task.complete ? 'line-through' : ''}>{task.title}</h3>
       <span>
         <Checkbox
           checked={task.complete}
