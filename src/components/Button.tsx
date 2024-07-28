@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode, MouseEvent } from 'react';
+import { ReactNode } from 'react';
 import { Button } from './ui/button';
 
 interface ButtonProps {
