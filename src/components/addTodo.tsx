@@ -1,5 +1,5 @@
 import { Button } from './ui/button';
-import { InsertData } from '@/actions/TodosActions';
+import { InsertData } from '@/services/TodosActions';
 import { Input } from './ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';

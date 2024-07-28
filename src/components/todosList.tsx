@@ -1,13 +1,14 @@
 'use client';
-import { fetchData } from '@/actions/TodosActions';
+import { fetchData } from '@/services/TodosActions';
 import { TaskForm } from './AddTodo';
 import { ButtonDemo } from './Button';
 import Item from './Todo';
 import { useState } from 'react';
+import { todoType } from '@/types/todoType';
 import { useQuery } from '@tanstack/react-query';
 import { elementType } from '@/types/todoType';
 
- export function TodosOperations () {
+export function TodosOperations() {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['todos'],
@@ -32,7 +33,7 @@ import { elementType } from '@/types/todoType';
       </p>
       <div className="lists">
         <ul>
-          {data?.map(({ element }: elementType) => (
+          {data.map((element: todoType) => (
             <Item key={element.id} task={element} />
           ))}
         </ul>
@@ -41,5 +42,4 @@ import { elementType } from '@/types/todoType';
       {showAddTaskForm && <TaskForm />}
     </div>
   );
-};
-
+}

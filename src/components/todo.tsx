@@ -4,7 +4,7 @@ import { Checkbox } from './ui/checkbox';
 import { ItemProps } from '@/types/todoType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { deleteData, updateCompleteStatus } from '@/actions/TodosActions';
+import { deleteData, updateCompleteStatus } from '@/services/TodosActions';
 
 const Item: FC<ItemProps> = ({ task }) => {
   const queryClient = useQueryClient();
