@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import QueryProvider from '@/providers/QueryClientProvider';
 import { Inter } from 'next/font/google';
-import NavBar from '@/components/NavBar';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -22,7 +21,6 @@ export default function RootLayout({
       <SessionProvider>
         <QueryProvider>
           <body className={inter.className}>
-            <NavBar />
             {children}
           </body>
         </QueryProvider>
