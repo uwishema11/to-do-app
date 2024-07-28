@@ -1,7 +1,7 @@
 'use client';
-import { fetchData } from '@/services/TodosActions';
+import { fetchData } from '@/actions/TodosActions';
 import { TaskForm } from './AddTodo';
-import { ButtonDemo } from './Button';
+import { ButtonDemo } from '../../components/Button';
 import Item from './Todo';
 import { useState } from 'react';
 import { todoType } from '@/types/todoType';

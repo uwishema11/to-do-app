@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
-import './globals.css';
 import QueryProvider from '@/providers/QueryClientProvider';
 import { Inter } from 'next/font/google';
 import NavBar from '@/components/NavBar';

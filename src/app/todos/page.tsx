@@ -1,4 +1,4 @@
-import { TodosOperations } from "@/components/TodosList";
+import { TodosOperations } from '@/app/todos/TodosList';
 
 const TodosPage = () => {
   return (

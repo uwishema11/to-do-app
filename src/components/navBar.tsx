@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import Link from 'next/link';
-import { SignOut } from './SignOut';
+import { SignOut } from '@/app/todos/SignOut';
 
 export default async function NavBar() {
   const session = await auth();

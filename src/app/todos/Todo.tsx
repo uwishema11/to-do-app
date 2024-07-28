@@ -1,10 +1,10 @@
 'use client';
-import { ButtonDemo } from './Button';
-import { Checkbox } from './ui/checkbox';
+import { ButtonDemo } from '@/components/Button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { ItemProps } from '@/types/todoType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { deleteData, updateCompleteStatus } from '@/services/TodosActions';
+import { deleteData, updateCompleteStatus } from '@/actions/TodosActions';
 
 const Item: FC<ItemProps> = ({ task }) => {
   const queryClient = useQueryClient();
