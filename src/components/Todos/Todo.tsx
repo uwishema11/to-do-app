@@ -1,6 +1,6 @@
 'use client';
-import { ButtonDemo } from '@/components/Button';
-import { Checkbox } from '@/components/ui/checkbox';
+import { ButtonDemo } from '../Button';
+import { Checkbox } from '../ui/checkbox';
 import { ItemProps } from '@/types/todoType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';

@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 import { InsertData } from '@/actions/TodosActions';
-import { Input } from '@/components/ui/input';
+import { Input } from '../ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -11,7 +11,7 @@ import {
   FormItem,
   FormField,
   FormMessage,
-} from '@/components/ui/form';
+} from '../ui/form';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 

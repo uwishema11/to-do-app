@@ -1,12 +1,11 @@
 'use client';
 import { fetchData } from '@/actions/TodosActions';
 import { TaskForm } from './AddTodo';
-import { ButtonDemo } from './Button';
+import { ButtonDemo } from '../Button';
 import Item from './Todo';
 import { useState } from 'react';
 import { todoType } from '@/types/todoType';
 import { useQuery } from '@tanstack/react-query';
-import { elementType } from '@/types/todoType';
 
 export function TodosOperations() {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
