@@ -1,10 +1,8 @@
-import { TodosOperations } from '@/app/todos/TodosList';
-import NavBar from '@/components/NavBar';
+import { TodosOperations } from '@/components/TodosList';
 
 const TodosPage = () => {
   return (
     <>
-    <NavBar />
       <TodosOperations />
     </>
   );

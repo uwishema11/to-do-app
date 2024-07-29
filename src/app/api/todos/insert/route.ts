@@ -2,6 +2,7 @@ import { db } from '@/db';
 import { NextRequest, NextResponse } from 'next/server';
 import { todos } from '@/db/schema';
 import { auth } from '@/auth';
+import { revalidatePath } from 'next/cache';
 
 export const POST = async (req: NextRequest) => {
   try {
@@ -29,6 +30,7 @@ export const POST = async (req: NextRequest) => {
       })
       .returning();
 
+    revalidatePath('/todos');
     return NextResponse.json({ newTask });
   } catch (error) {
     return NextResponse.json(
