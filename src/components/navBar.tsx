@@ -1,7 +1,7 @@
 'use server';
-
 import { auth } from '@/auth';
 import Link from 'next/link';
+import { SignOut } from './Auth/SignOut';
 
 export default async function NavBar() {
   const session = await auth();
@@ -13,9 +13,7 @@ export default async function NavBar() {
             <Link href="/">TodoApp</Link>
           </div>
           <ul className="flex space-x-4">
-            <li>
-              <Link href="/api/auth/signout">Log Out</Link>
-            </li>
+            <SignOut />
             <li>
               <Link href="/todos">Your Todos</Link>
             </li>
@@ -33,7 +31,7 @@ export default async function NavBar() {
         </div>
         <ul className="flex space-x-4">
           <li>
-            <Link href="/api/auth/signin">Login</Link>
+            <Link href="/login">Login</Link>
           </li>
           <li>
             <Link href="/todos">Your Todos</Link>

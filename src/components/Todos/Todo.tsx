@@ -1,27 +1,13 @@
 'use client';
 import { ButtonDemo } from '../Button';
 import { Checkbox } from '../ui/checkbox';
+import { useDeleteTodos } from '@/hooks/useTodos';
 import { ItemProps } from '@/types/todoType';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { deleteData, updateCompleteStatus } from '@/actions/TodosActions';
 
 const Item: FC<ItemProps> = ({ task }) => {
-  const queryClient = useQueryClient();
-
-  const updateMutation = useMutation({
-    mutationFn: updateCompleteStatus,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
-    },
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: deleteData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
-    },
-  });
+  const deleteMutation = useDeleteTodos();
+  const updateMutation = useDeleteTodos();
 
   const handleDeleteTask = (id: string) => {
     deleteMutation.mutate(id);

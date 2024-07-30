@@ -1,5 +1,5 @@
 import { Button } from '../ui/button';
-import { InsertData } from '@/actions/TodosActions';
+import { useAddTodos } from '@/hooks/useTodos';
 import { Input } from '../ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -13,8 +13,6 @@ import {
   FormMessage,
 } from '../ui/form';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 const taskSchema = z.object({
   title: z.string().min(2, {
     message: 'Task name must be at least 2 characters long',
@@ -22,22 +20,12 @@ const taskSchema = z.object({
 });
 
 export function TaskForm() {
+  const addMutation = useAddTodos();
+
   const form = useForm<z.infer<typeof taskSchema>>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
       title: '',
-    },
-  });
-
-  const queryClient = useQueryClient();
-
-  const addMutation = useMutation({
-    mutationFn: InsertData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
-    },
-    onError: (error) => {
-      return <span>Error: {error.message}</span>;
     },
   });
 

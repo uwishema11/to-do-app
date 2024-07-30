@@ -1,5 +1,4 @@
-import { TodosOperations } from '../../components/Todos/TodosList';
-
+import { TodosOperations } from '@/components/Todos/TodosList';
 const TodosPage = () => {
   return (
     <>
