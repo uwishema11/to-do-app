@@ -2,7 +2,8 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "next"
+    "next",
+    "prettier"
   ],
   "plugins": ["react", "react-hooks", "prettier"],
   "parserOptions": {
@@ -40,6 +41,11 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": ["error"]
+    "prettier/prettier": [
+      "error",
+      {
+        "arrowParens": "avoid"
+      }
+    ]
   }
 }

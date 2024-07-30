@@ -20,7 +20,7 @@ export function TodosOperations() {
   }
 
   const handleAddTaskButton = () => {
-    setShowAddTaskForm((showForm) => !showForm);
+    setShowAddTaskForm(showForm => !showForm);
   };
 
   return (
