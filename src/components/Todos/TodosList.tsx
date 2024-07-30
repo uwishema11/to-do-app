@@ -24,7 +24,7 @@ export function TodosOperations() {
   };
 
   return (
-    <div className="m-20 w-3/4 bg-gray-500 p-7 font-semibold">
+    <div className="m-20 w-3/4 bg-gray-500 p-7 font-semibold rounded">
       <p className="mb-4 py-7 text-center text-3xl font-bold underline">
         To do list app
       </p>
