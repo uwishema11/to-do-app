@@ -6,13 +6,11 @@ import Item from './Todo';
 import { useState } from 'react';
 import { todoType } from '@/types/todoType';
 import { useQuery } from '@tanstack/react-query';
+import { useTodos } from '@/hooks/useTodos';
 
 export function TodosOperations() {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
-  const { isLoading, isError, data, error } = useQuery({
-    queryKey: ['todos'],
-    queryFn: fetchData,
-  });
+  const { isLoading, isError, data, error } = useTodos();
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -22,7 +20,7 @@ export function TodosOperations() {
   }
 
   const handleAddTaskButton = () => {
-    setShowAddTaskForm((showForm) => !showForm);
+    setShowAddTaskForm(showForm => !showForm);
   };
 
   return (
@@ -32,7 +30,7 @@ export function TodosOperations() {
       </p>
       <div className="lists">
         <ul>
-          {data.map((element: todoType) => (
+          {data?.map((element: todoType) => (
             <Item key={element.id} task={element} />
           ))}
         </ul>
